@@ -59,4 +59,3 @@ router.get('/logout',
 
 
 module.exports = router;
-// now we will use this in qpp.js file

@@ -1,20 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-
-// step : 27 import the browser router
+import './index.css'
 import { BrowserRouter } from 'react-router-dom'
-import Usercontext from './context/Usercontext.jsx'
+import UserContextProvider from './context/Usercontext'
+import CaptainContextProvider from './context/CaptainContext'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    {/* step : 27 wrap the App component with BrowserRouter */}
-    {/* step 35 :- wrap the full application by this usercontext */}
-    <Usercontext>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-    </Usercontext>
-  </StrictMode>,
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <UserContextProvider>
+      <CaptainContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </CaptainContextProvider>
+    </UserContextProvider>
+  </React.StrictMode>,
 )
