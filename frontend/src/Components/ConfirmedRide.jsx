@@ -1,5 +1,8 @@
 import React from "react";
 const ConfirmedRide = (props) => {
+    console.log(props);
+    console.log(props.vehicleType);
+
     return (
         <div>
             <h5 className="p-1 text-center w-[90%] absolute top-0" onClick={() => { props.setVehiclePanelOpen(false) }}>
@@ -13,21 +16,21 @@ const ConfirmedRide = (props) => {
                     <div className="flex items-center gap-5 p-3 border-b-2">
                         <i className="text-lg ri-map-pin-user-fill"></i>
                         <div>
-                            <h3 className="text-lg font-medium">562/1-A</h3>
-                            <p className="text-base -mt-1 text-gray-800">RashBihari Avenue , Kolkata</p>
+                            <h3 className="text-lg font-medium">Pickup</h3>
+                            <p className="text-base -mt-1 text-gray-800">{props.pickup}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-5 p-3 border-b-2">
                         <i className="text-lg ri-map-pin-2-fill"></i>
                         <div>
-                            <h3 className="text-lg font-medium">562/1-A</h3>
-                            <p className="text-base -mt-1 text-gray-800">RashBihari Avenue , Kolkata</p>
+                            <h3 className="text-lg font-medium">Destination</h3>
+                            <p className="text-base -mt-1 text-gray-800">{props.destination}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-5 p-3">
                         <i className="text-lg ri-currency-line"></i>
                         <div>
-                            <h3 className="text-lg font-medium">₹197.45</h3>
+                            <h3 className="text-lg font-medium">₹{props.fare[props.vehicleType]}</h3>
                             <p className="text-base -mt-1 text-gray-800">Cash ,cash</p>
                         </div>
                     </div>
@@ -35,6 +38,7 @@ const ConfirmedRide = (props) => {
                 <button onClick={() => {
                     props.setVehicleFound(true)
                     props.setConfirmedRidePanelOpen(false)
+                    props.createRide()
                 }} className="w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg">Confirm Ride</button>
             </div>
         </div>

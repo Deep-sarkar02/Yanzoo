@@ -84,26 +84,18 @@ const captainschema = new mongoose.Schema({
     },
     // here we will use the location of the captain
     location: {
-        // latititde and longitidue
-        // we will use the type of number
-        lat:
-        {
-            type: Number,
-            //required : true,
-            // min : [-90 , "Latitude must be between -90 and 90"],
-            // max : [90 , "Latitude must be between -90 and 90"]
+        type: {
+            type: String,
+            enum: ['Point'],
         },
-        lng:
-        {
-            type: Number,
-            //required : true,
-            // min : [-180 , "Longitude must be between -180 and 180"],
-            // max : [180 , "Longitude must be between -180 and 180"]
+        coordinates: {
+            type: [Number],
         }
-
     }
 
 })
+
+captainschema.index({ location: '2dsphere' });
 
 //some of the common methods
 // now we will create a jwt token from the

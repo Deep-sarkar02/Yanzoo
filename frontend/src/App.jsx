@@ -17,6 +17,7 @@ import Captainhome from './pages/Captainhome';
 import CaptainProtectWrapper from './pages/CaptainProtectWrapper';
 import CaptainLogout from './pages/CaptainLogout';
 import Riding from './pages/Riding';
+import CaptainRiding from './pages/CaptainRiding';
 
 const App = () => {
   // aftetr the usercontext.jsx file is created
@@ -43,6 +44,8 @@ const App = () => {
         <Route path='/login' element={<UserLogin />} />
         {/* now we will render the riding page */}
         <Route path='/riding' element={<Riding />} />
+        {/* now fot=r the captain riding page */}
+        <Route path='/captain-riding' element={<CaptainRiding />} />
 
         {/** now render the signup page */}
         <Route path='/signup' element={<UserSignup />} />

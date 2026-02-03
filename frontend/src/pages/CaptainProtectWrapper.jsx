@@ -14,7 +14,7 @@ import { CaptainDataContext } from "../context/CaptainContext";
 import axios from 'axios';
 
 const CaptainProtectWrapper = ({ children }) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('captain-token');
     const navigate = useNavigate();
     const { captain, setCaptain } = useContext(CaptainDataContext);
     const [isLoading, setIsLoading] = useState(true);
@@ -44,7 +44,7 @@ const CaptainProtectWrapper = ({ children }) => {
         }).catch(err => {
             console.log(err);
             // if the error occours in the token then remove the token and redirect to the login page
-            localStorage.removeItem('token');
+            localStorage.removeItem('captain-token');
             navigate('/captain-login');
         });
     }, [token, navigate, setCaptain]);

@@ -13,7 +13,7 @@ import { UserDataContext } from '../context/Usercontext';
 import axios from 'axios';
 
 const UserProtectWrapper = ({ children }) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('user-token');
     const navigate = useNavigate();
     const { user, setUser } = useContext(UserDataContext);
     const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +35,7 @@ const UserProtectWrapper = ({ children }) => {
             }
         }).catch(err => {
             console.log(err);
-            localStorage.removeItem('token');
+            localStorage.removeItem('user-token');
             navigate('/login');
         });
     }, [token, navigate, setUser]); // Added navigate and setUser to dependency array

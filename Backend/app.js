@@ -14,7 +14,9 @@ const connectToDb = require("./db/db");
 
 // require the userroutes
 const userroutes = require('./routes/user.routes')
-
+const mapsRoute = require('./routes/maps.routes')
+// we will require the ride routes
+const rideRoutes = require('./routes/rides.routes')
 //step - 6
 // require the cookeie parser
 const cookieParser = require('cookie-parser');
@@ -27,7 +29,7 @@ connectToDb()
 // app.use 
 app.use(cors())
 app.use(express.json());
-app.use(express.urlencoded({extended : true}))
+app.use(express.urlencoded({ extended: true }))
 
 
 
@@ -35,21 +37,24 @@ app.use(express.urlencoded({extended : true}))
 
 // ------------------------Routes section------------------------------
 // create the route
-app.get("/" , (req ,res)=>
-{
+app.get("/", (req, res) => {
     res.send("hello world");
 })
 
 //user routes
 // create the route and also we iwll pass trhe param
-app.use('/users' , userroutes)
+app.use('/users', userroutes)
 
 
 
 // step - 14
 // captain routes
 const captainroutes = require('./routes/captain.routes');
-app.use('/captains' , captainroutes);
+app.use('/captains', captainroutes);
+// use the maps route
+app.use('/maps', mapsRoute);
+// for the rides route
+app.use('/rides', rideRoutes);
 
 
 
@@ -59,6 +64,6 @@ app.use('/captains' , captainroutes);
 
 
 // export the app
-module.exports =app;
+module.exports = app;
 // now create the  server file
 

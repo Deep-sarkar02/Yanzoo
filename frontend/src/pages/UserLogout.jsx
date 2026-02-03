@@ -9,7 +9,7 @@ const UserLogout = () => {
     // here first get the toekn and pass to the backend to logout the user
     // then send the response to the frontend
     // now we will get the token from the local storage
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('user-token');
     const navigate = useNavigate();
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_BASE_URL}/users/logout`, {
@@ -18,13 +18,13 @@ const UserLogout = () => {
             }
         }).then((response) => {
             if (response.status === 200) {
-                localStorage.removeItem('token');
+                localStorage.removeItem('user-token');
                 navigate('/login');
             }
         }).catch(err => {
             console.error(err);
             // Even if it fails, we might want to clear local storage and redirect
-            localStorage.removeItem('token');
+            localStorage.removeItem('user-token');
             navigate('/login');
         });
     }, [token, navigate]);

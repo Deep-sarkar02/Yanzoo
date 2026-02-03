@@ -60,7 +60,7 @@ const UserLogin = () => {
         setUser(data.user); // set the user data in the context
         // step: 43 :  use local storage to store the user data
         //now after login 
-        localStorage.setItem('token', data.token); // store the token in the local storage we will get from the data.token
+        localStorage.setItem('user-token', data.token); // store the token in the local storage we will get from the data.token
 
         navigate('/home'); // navigate to the home page
       }
@@ -78,11 +78,7 @@ const UserLogin = () => {
     // Wrap everything in a single root element
     <div>
       <div className="p-7 h-screen flex flex-col justify-between">
-        <img
-          className=" w-16 mb-10 "
-          src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
-          alt=""
-        />
+        <h1 className="w-16 mb-10 text-3xl font-bold text-black" >Yanzoo</h1>
         {/**====================step: -31======================= */}
         {/* User Login Page */}
         <form action="" onSubmit={(e) => { submithandler(e) }} >

@@ -12,54 +12,66 @@ const userservice = require('../services/user.service')
 // =======================register controller========================
 // now we will create the register user function
 module.exports.registeruser = async (req, res, next) => {
-    // now we will write the logic to create the user
-    // create a new folder services and unde that a new file user.service.js
+    try {
+        // now we will write the logic to create the user
+        // create a new folder services and unde that a new file user.service.js
 
 
 
-    // now after the requirement create the function
-    const errors = validationResult(req); // if the erroe is there
-    // check the errors
-    if (!errors.isEmpty()) {
-        // if there is  error then we will return 400 status
-        return res.status(400).json({ errors: errors.array() })
-    }
-
-    console.log("hello")
-    console.log(req.body)
-    // if all these are okey
-    // require all the data from the re.body
-    const { fullname, email, password } = req.body;
-
-
-    // now we will check if the user with this email already exists or not
-    const existinguser = await usermodel.findOne({ email });
-    // if the user already exists then we will return 400 status
-    if (existinguser) {
-        // user already exists
-        return res.status(400).json({ message: "User with this email already exists" })
-    }
-
-
-    // now hash the password
-    const h_pass = await usermodel.hashPassword(password);
-
-
-
-    // now we will call the userservice and also register the user 
-    const user = await userservice.createuser(
-        {
-            firstname: fullname.firstname,
-            lastname: fullname.lastname,
-            email,
-            password: h_pass
+        // now after the requirement create the function
+        const errors = validationResult(req); // if the erroe is there
+        // check the errors
+        if (!errors.isEmpty()) {
+            // if there is  error then we will return 400 status
+            console.log('Validation errors:', errors.array());
+            return res.status(400).json({ errors: errors.array() })
         }
-    )
 
-    // now we need to geenrate the token for the user model
-    const token = user.generateAuthToken();
-    // afet the token we will pass the token and t the user model which has been created now
-    res.status(201).json({ token, user })
+        console.log("hello")
+        console.log(req.body)
+        // if all these are okey
+        // require all the data from the re.body
+        const { fullname, email, password } = req.body;
+
+
+        // now we will check if the user with this email already exists or not
+        const existinguser = await usermodel.findOne({ email });
+        // if the user already exists then we will return 400 status
+        if (existinguser) {
+            // user already exists
+            console.log('User already exists with email:', email);
+            return res.status(400).json({ message: "User with this email already exists" })
+        }
+
+
+        // now hash the password
+        console.log('Hashing password...');
+        const h_pass = await usermodel.hashPassword(password);
+        console.log('Password hashed successfully');
+
+
+
+        // now we will call the userservice and also register the user 
+        console.log('Creating user...');
+        const user = await userservice.createuser(
+            {
+                firstname: fullname.firstname,
+                lastname: fullname.lastname,
+                email,
+                password: h_pass
+            }
+        )
+        console.log('User created:', user);
+
+        // now we need to geenrate the token for the user model
+        const token = user.generateAuthToken();
+        console.log('Token generated, sending response');
+        // afet the token we will pass the token and t the user model which has been created now
+        res.status(201).json({ token, user })
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
 }
 
 

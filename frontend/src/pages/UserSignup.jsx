@@ -46,18 +46,22 @@ const UserSignup = () => {
       password: password
     }
 
+    console.log('Submitting registration:', newUser);
+
     try {
       // Corrected typo from 'respose' to 'response'
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser);
 
-      console.log(response);
+      console.log('Registration response:', response);
 
       if (response.status === 201) {
         const data = response.data;
+        console.log('Registration successful, user data:', data.user);
         setUser(data.user);
         // step: 43 :  use local storage to store the user data
         //now after login 
-        localStorage.setItem('token', data.token); // store the token in the local storage we will get from the data.token
+        localStorage.setItem('user-token', data.token); // store the token in the local storage we will get from the data.token
+        console.log('Token stored, navigating to /home');
         navigate('/home');
 
 
@@ -72,6 +76,10 @@ const UserSignup = () => {
       }
     } catch (error) {
       console.error("Registration failed:", error);
+      console.error("Error response:", error.response);
+      console.error("Error response data:", error.response?.data);
+      console.error("Error message:", error.message);
+      alert(`Registration failed: ${error.response?.data?.message || error.message}`);
       // Here you can set an error state to show a message to the user
     }
   }
@@ -84,11 +92,7 @@ const UserSignup = () => {
       {/**step: -33 copy all the details from the userlogin page */}
       <div>
         <div className="p-7 h-screen flex flex-col justify-between">
-          <img
-            className=" w-16 mb-10 "
-            src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
-            alt=""
-          />
+          <h1 className="w-16 mb-10 text-3xl font-bold text-black" >Yanzoo</h1>
           {/**====================step: -31======================= */}
           {/* User Login Page */}
           <form action="" onSubmit={(e) => { submithandler(e) }} >
@@ -167,7 +171,7 @@ const UserSignup = () => {
           <div>
 
             <p className="text-[10px] leading-tight" >
-              By proceeding, you agree to Uber's <span className="text-blue-600" >Terms of Service</span> and acknowledge that you have read the <span className="text-blue-600" >Privacy Policy</span>, including Cookie Use. </p>
+              By proceeding, you agree to Yanzoo's <span className="text-blue-600" >Terms of Service</span> and acknowledge that you have read the <span className="text-blue-600" >Privacy Policy</span>, including Cookie Use. </p>
 
           </div>
         </div>

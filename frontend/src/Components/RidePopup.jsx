@@ -17,7 +17,7 @@ const RidePopup = (props) => {
                     {/* user image */}
                     <img className="h-10 w-10 rounded-full object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpUtppxAYvLQxuaGpNpfglY-s1oubTXk0EmQ&s" alt="" />
                     {/* user name */}
-                    <h2 className="text-xl font-medium">Rimpi Mondal</h2>
+                    <h2 className="text-xl font-medium">{props.ride?.user.fullname.firstname + " " + props.ride?.user.fullname.lastname}</h2>
                 </div>
                 <h5 className="text-lg font-medium">2.2 km away</h5>
             </div>
@@ -31,8 +31,8 @@ const RidePopup = (props) => {
                     <div className="flex items-center gap-5 p-3 border-b-2">
                         <i className="text-lg ri-map-pin-user-fill"></i>
                         <div>
-                            <h3 className="text-lg font-medium">562/1-A</h3>
-                            <p className="text-base -mt-1 text-gray-800">RashBihari Avenue , Kolkata</p>
+                            <h3 className="text-lg font-medium">Pickup</h3>
+                            <p className="text-base -mt-1 text-gray-800">{props.ride?.pickup_location}</p>
                         </div>
                     </div>
                     {/* pickup ends */}
@@ -41,8 +41,8 @@ const RidePopup = (props) => {
                     <div className="flex items-center gap-5 p-3 border-b-2">
                         <i className="text-lg ri-map-pin-2-fill"></i>
                         <div>
-                            <h3 className="text-lg font-medium">562/1-A</h3>
-                            <p className="text-base -mt-1 text-gray-800">RashBihari Avenue , Kolkata</p>
+                            <h3 className="text-lg font-medium">Destination</h3>
+                            <p className="text-base -mt-1 text-gray-800">{props.ride?.dropoff_location}</p>
                         </div>
                     </div>
                     {/* destination ends */}
@@ -51,29 +51,34 @@ const RidePopup = (props) => {
                     <div className="flex items-center gap-5 p-3">
                         <i className="text-lg ri-currency-line"></i>
                         <div>
-                            <h3 className="text-lg font-medium">₹197.45</h3>
-                            <p className="text-base -mt-1 text-gray-800">Cash ,cash</p>
+                            <h3 className="text-lg font-medium">₹{props.ride?.fare}</h3>
+                            <p className="text-base -mt-1 text-gray-800">Cash</p>
                         </div>
                     </div>
                     {/* amount ends */}
                 </div>
                 {/* pickup and destination ends */}
 
-                {/* confirm btn starts */}
-                <button onClick={() => {
-                    // now the confirm ride panel will be true
-                    props.setConfirmRidepopupPanel(true)
-                }} className="w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg">Accept</button>
-                {/* confirm btn ends */}
+
+
+                {/* buttons */}
+                <div className="mt-5 flex justify-between items-center w-full ">
+                    {/* confirm btn starts */}
+                    <button onClick={() => {
+                        props.confirmRide()
+                        props.setConfirmRidepopupPanel(true)
+                    }} className="bg-green-600 text-white font-semibold p-3 px-8 rounded-lg">Accept</button>
+                    {/* confirm btn ends */}
 
 
 
 
-                {/*cancel btn starts */}
-                <button onClick={() => {
-                    props.setRidepopupPanel(false)
-                }} className="w-full mt-2 bg-gray-300 text-gray-700 font-semibold p-2 rounded-lg">Ignore</button>
-                {/* cancel btn ends */}
+                    {/*cancel btn starts */}
+                    <button onClick={() => {
+                        props.setRidepopupPanel(false)
+                    }} className="mt-1 bg-gray-300 text-gray-700 font-semibold p-3 px-8 rounded-lg">Ignore</button>
+                    {/* cancel btn ends */}
+                </div>
             </div>
             {/* rider dashboard ends */}
         </div>
