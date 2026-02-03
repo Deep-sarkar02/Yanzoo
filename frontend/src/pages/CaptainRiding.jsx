@@ -35,7 +35,7 @@ const CaptainRiding = () => {
             {/* this is for the uber logo and the logout btn */}
             <div className="fixed p-6 top-1 flex justify-between items-center w-screen">
                 {/* <img className=" w-16" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/2560px-Uber_logo_2018.svg.png" alt="" /> */}
-                <h1 className="w-16 text-3xl font-bold text-black" >Yanzoo</h1>
+                <img className="w-16" src="/yanzoo-logo.png" alt="Yanzoo Logo" />
                 <Link to="/captain-home" className=" h-10 w-10 bg-white flex items-center justify-center rounded-full">
                     <i className="text-lg ri-logout-box-line"></i>
                 </Link>

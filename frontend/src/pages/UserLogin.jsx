@@ -78,7 +78,7 @@ const UserLogin = () => {
     // Wrap everything in a single root element
     <div>
       <div className="p-7 h-screen flex flex-col justify-between">
-        <h1 className="w-16 mb-10 text-3xl font-bold text-black" >Yanzoo</h1>
+        <img className="w-20 mb-10" src="/yanzoo-logo.png" alt="Yanzoo Logo" />
         {/**====================step: -31======================= */}
         {/* User Login Page */}
         <form action="" onSubmit={(e) => { submithandler(e) }} >

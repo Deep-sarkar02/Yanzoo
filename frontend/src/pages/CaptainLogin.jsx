@@ -70,7 +70,7 @@ const CaptainLogin = () => {
     //step : -32 paste the deatils fromt the userlogin page
     <div>
       <div className="p-7 h-screen flex flex-col justify-between">
-        <h1 className="w-20 mb-3 text-3xl font-bold text-black" >Yanzoo</h1>
+        <img className="w-24 mb-3" src="/yanzoo-logo.png" alt="Yanzoo Logo" />
         {/**====================step: -31======================= */}
         {/* User Login Page */}
         <form action="" onSubmit={(e) => { submithandler(e) }} >
